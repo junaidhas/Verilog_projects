@@ -1,0 +1,46 @@
+`timescale 10ns / 1ps
+
+module full_adder_test;
+
+    reg a;
+    reg b;
+    reg c;
+    
+    wire op_sum;
+    wire op_carry;
+    
+    //instantiation - connection from test bench to DUT
+    
+    full_adder dut(.a(a),
+                   .b(b),
+                   .c(c),
+                   .op_sum(op_sum),
+                   .op_carry(op_carry));
+
+
+    // generating input
+//    initial begin
+//        a = 0; b = 0; c = 0;
+//        #1;
+//        a = 0; b = 0; c = 1;
+//        #1;
+//        a = 0; b = 1; c = 0;
+//        #1;
+//    end
+
+    initial begin
+        $monitor ( "a=%b b=%b c=%b sum=%b carry=%b",a,b,c,op_sum,op_carry);
+        {a,b,c} = 3'b0;
+        #10;
+        if ({op_carry,op_sum}== a+b+c)
+            $display ("Design is correct");
+         else $display ("Design is wrong");
+        repeat (7) begin
+        {a,b,c} = {a,b,c}+1;
+         #10;
+         if ({op_carry,op_sum}== a+b+c)
+            $display ("Design is correct");
+         else $display ("Design is wrong");
+        end
+    end
+endmodule
