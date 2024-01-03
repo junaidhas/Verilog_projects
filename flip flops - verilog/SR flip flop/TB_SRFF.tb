@@ -1,0 +1,42 @@
+module TB_SRFF;
+
+    //inputs
+    reg S;
+    reg R;
+    reg clk;
+    reg rst;
+    reg preset;
+    
+    //outputs
+    wire Q;
+    wire Qbar;
+    
+    //Instantiate the Device under test (DUT)
+    SR_FF dut (
+        .Q(Q),
+        .Qbar(Qbar),
+        .S(S),
+        .R(R),
+        .clk(clk),
+        .rst(rst),
+        .preset(preset)
+        );
+        
+    initial begin
+        //initialize inputs
+        S=1'b0;
+        R=1'b0;
+        clk =1'b0;
+        rst =1'b1;
+        #10 preset = 1'b1;
+        #10 preset = 1'b0;
+    end    
+   
+   
+    always #1 clk =~clk;
+    always #2 {S,R} = {S,R} +1'b1;
+    initial #10 rst = 1'b0;
+    initial #100 $finish;
+    
+    
+ endmodule

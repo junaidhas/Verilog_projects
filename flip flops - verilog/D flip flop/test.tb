@@ -1,0 +1,32 @@
+module test;
+    reg clk;
+    reg rst;
+    reg Din;
+    wire Dout_S, Dout_A;
+    
+    
+    dff ms(clk, rst, Din, Dout_S);
+    dff_1 ma (clk, rst, Din, Dout_A);
+    
+    always #6 clk =!clk; //on time = 6 ns off time= 6ns time period = 12 ns; 0ns clk =0, 6ns clk =1
+    
+    initial begin 
+        clk = 0;
+        rst =0;
+        Din =0;
+        #2;
+        rst =1;
+        #10
+        rst = 0;
+        repeat (10) begin
+        Din = !Din;
+        #8;
+        end
+        #200;
+        $finish;
+    end
+    
+   
+ endmodule
+      
+    

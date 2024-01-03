@@ -1,0 +1,45 @@
+module TB_TFF;
+
+    //inputs
+    reg T;
+    reg clk;
+    reg rst;
+    
+    //outputs
+    wire Q;
+    
+    //Instantiate the Device under test (DUT)
+    TFF dut (
+        .Q(Q),
+        .T(T),
+        .clk(clk),
+        .rst(rst)
+        );
+        
+    initial begin
+        //initialize inputs
+        T=1'b1;
+        clk =1'b1;
+        rst =1'b1;
+        
+        // Wait 100 ns for global reset to finish
+        #100;
+        T=1'b0;
+        rst =1'b0;
+        
+        // Add stimulus here
+        #100
+        
+        T=1'b1;
+        
+        #50
+        T=1'b0;
+        
+    end
+   
+   // instantiate the clock signal 
+ always
+ #10 clk =~clk;
+    
+    
+ endmodule

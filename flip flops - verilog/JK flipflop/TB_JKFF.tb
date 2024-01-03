@@ -1,0 +1,40 @@
+module TB_JKFF;
+
+    //inputs
+    reg j;
+    reg k;
+    reg clk ;
+    
+    reg rst;
+    
+    //outputs
+    wire Q;
+    wire Qbar;
+    
+    //Instantiate the Device under test (DUT)
+    JK_FF dut (
+        .j(j),
+        .k(k),
+        .Q(Q),
+        .Qbar(Qbar),
+        .clk(clk),
+        .rst(rst)
+        );
+        
+    initial begin
+        //initialize inputs
+        j = 1'b0;
+        k = 1'b0;
+        clk =1'b0;
+        rst =1'b1;
+        
+        end
+   
+        always  #1 clk =~clk;
+        always #2 {j,k} = {j,k} + 1'b1;
+        initial #10 rst = 1'b0;
+        initial #100 $finish;
+        
+    
+    
+ endmodule
