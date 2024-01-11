@@ -1,0 +1,37 @@
+module TB_SIPO;
+
+    //inputs
+    reg din;
+    
+    reg clk ;
+    
+    reg rst;
+    
+    //outputs
+    wire [3:0] dout;
+    
+    
+    //Instantiate the Device under test (DUT)
+    sipo dut (
+        .din(din),
+        .dout(dout),
+        .clk(clk),
+        .rst(rst)
+        );
+        
+    initial begin
+        //initialize inputs
+        din = 0;
+        clk =0;
+        rst =1;
+        #10 rst =1'b0;
+    end
+   
+        always  #2 clk =~clk;
+        always #4 din=~din;
+        initial $monitor("din=%b,dout=%b",din,dout);
+        initial #100 $finish;
+        
+    
+    
+ endmodule
