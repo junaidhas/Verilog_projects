@@ -1,0 +1,42 @@
+module TB_PIPO;
+
+    //inputs
+    reg [3:0] data_in;
+    
+    reg clk ;
+    
+    reg rst;
+    
+    //outputs
+    wire [3:0] dout;
+    
+    
+    //Instantiate the Device under test (DUT)
+    pipo dut (
+        .data_in(data_in),
+        .dout(dout),
+        .clk(clk),
+        .rst(rst)
+        );
+        
+    initial begin
+        //initialize inputs
+        clk =0;
+        rst =1;
+        data_in = 4'b1010;
+        #5 rst = 0;
+        #2 data_in = 4'b0000;
+        #2 data_in = 4'b0011;
+        #2 data_in = 4'b1011;
+        #2 data_in = 4'b0111;
+        #2 data_in = 4'b0110;
+      end
+   
+        always  #1 clk =~clk;
+        
+        initial $monitor("data_in=%b,dout=%b",data_in,dout);
+        initial #20 $finish;
+        
+    
+    
+ endmodule
