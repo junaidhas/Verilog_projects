@@ -1,2 +1,2 @@
 # Verilog_projects
-A collection of Verilog Projects implemented by me to improve my proficiency in verilog
+This repository contains Verilog projects developed by [Your Name]. It serves as a platform to explore various aspects of digital design and FPGA programming using Verilog HDL.
